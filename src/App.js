@@ -5,7 +5,7 @@ function App() {
     <div className='grid-container'>
     <BrowserRouter>
 			<header>
-				<Link to='/'>React Shopping Cart</Link>
+				<Link to='/'>Fashion Trend</Link>
 				<Link to='/admin'>Admin</Link>
 			</header>
 			<main>
