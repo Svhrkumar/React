@@ -9,7 +9,7 @@ function App() {
 				<Link to='/admin'>Admin</Link>
 			</header>
 			<main>
-			list
+			Product list
 			</main>
       <footer>All right is reserved.</footer>
       </BrowserRouter>
