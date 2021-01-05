@@ -3,10 +3,13 @@ import Product from './data.json';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Products from './components/Products';
 import Filter from './components/Filter';
+import Cart from './components/Cart';
 function App() {
 	const [product, setProduct] = useState(Product.products);
 	const [size, setSize] = useState("")
 	const [sort, setSort] = useState("")
+	const [cartItems,setCartItems] = useState([])
+
 	const filterProduct = (event) => {
 		console.log("---size----", event.target.value)
 		if (event.target.value === "") {
@@ -28,6 +31,30 @@ function App() {
 
 	}
 
+	const addToCart = (product)=>
+	{
+		const cart = cartItems.slice()
+		let alreadyInCart = false
+		
+		 console.log("--------added-------",cart)
+	
+		 cart.forEach(item =>{
+			 if(item._id == product._id){
+				 item.count++;
+				 alreadyInCart = true
+			 }
+		 })
+		 if(!alreadyInCart){
+			cart.push({...product, count:1}) 
+			
+		 }
+		 setCartItems(cart)
+	}
+	  
+	const removeItem = (item) => {
+		const cart = cartItems.slice()
+		setCartItems(cart.filter((x) => x._id !== item._id))
+	}
 	return (
 		<div className='grid-container'>
 			<BrowserRouter>
@@ -39,9 +66,11 @@ function App() {
 					<div className='content'>
 						<div className='main'>
 							<Filter count={product.length} size={size} sort={sort} filterProducts={filterProduct} sortProducts={sortProduct} />
-							<Products products={product} />
+							<Products products={product} addtocart={addToCart}/>
 						</div>
-						<div className='sidebar'></div>
+						<div className='sidebar'>
+						<Cart cartItems ={cartItems} removeItem={removeItem}/>
+						</div>
 					</div>
 				</main>
 				<footer>All right is reserved.</footer>
