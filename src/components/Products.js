@@ -5,7 +5,7 @@ const Products = ({ products,addtocart }) => {
 	return (
         <div>
         <ul className="products">
-			{products.map((product) => (
+			{products && products.map((product) => (
 				<li key={product._id}>
 					{console.log('products', product)}
 					<div className='product'>
