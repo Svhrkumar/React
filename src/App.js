@@ -8,7 +8,7 @@ function App() {
 	const [product, setProduct] = useState(Product.products);
 	const [size, setSize] = useState("")
 	const [sort, setSort] = useState("")
-	const [cartItems,setCartItems] = useState(localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")):[])
+	const [cartItems,setCartItems] = useState(localStorage.getItem("cartItems") && localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")):[])
 
 	const filterProduct = (event) => {
 		console.log("---size----", event.target.value)
