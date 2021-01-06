@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import formatCurrency from '../util';
+import Fade from "react-reveal/Fade"
+
 const Cart = (props) => {
 	const [checkOut, setCheckOut] = useState(false);
 	const [email, setEmail] = useState('');
@@ -18,6 +20,16 @@ const Cart = (props) => {
 		props.createorder(order)
 
 	};
+	const removeCart = (item) =>{
+		props.removeItem(item)
+		console.log("------item----",props.cartItems.length)
+		if(props.cartItems.length === 1)
+		{
+			setCheckOut(false)
+		}
+		
+	
+	}
 	return (
 		<div>
 			{props.cartItems.length === 0 ? (
@@ -34,6 +46,7 @@ const Cart = (props) => {
 				) : (
 					<>
 						<div className='cart'>
+						<Fade left cascade>
 							<ul className='cart-items'>
 								{props.cartItems.map((item) => (
 									<li key={item._id}>
@@ -46,7 +59,7 @@ const Cart = (props) => {
 												{item.price} x {item.count}
 												<button
 													className='button'
-													onClick={() => props.removeItem(item)}>
+													onClick={() => removeCart(item)}>
 													Remove
 												</button>
 											</div>
@@ -54,6 +67,7 @@ const Cart = (props) => {
 									</li>
 								))}
 							</ul>
+							</Fade>
 						</div>
 						<div className='cart'>
 							<div className='total'>
@@ -74,7 +88,8 @@ const Cart = (props) => {
 						</div>
 					</>
 				)}
-				{checkOut ? (
+				{ checkOut ? (
+					<Fade right cascade>
 					<div className='cart'>
 						<form >
 							<ul className='form-container'>
@@ -116,9 +131,11 @@ const Cart = (props) => {
 							</ul>
 						</form>
 					</div>
+					</Fade>
 				) : (
 					''
 				)}
+			
 			</div>
 		</div>
 	);
