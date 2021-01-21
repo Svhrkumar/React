@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Products from './components/Products';
 import Filter from './components/Filter';
 import Cart from './components/Cart';
+import store from "./store"
+import {Provider} from "react-redux"
 function App() {
 	const [product, setProduct] = useState(Product.products);
 	const [size, setSize] = useState("")
@@ -63,6 +65,7 @@ function App() {
 	  console.log("------------------",order.name)
 	}
 	return (
+		<Provider store={store}>
 		<div className='grid-container'>
 			<BrowserRouter>
 				<header>
@@ -83,6 +86,7 @@ function App() {
 				<footer>All right is reserved.</footer>
 			</BrowserRouter>
 		</div>
+		</Provider>
 	);
 }
 
